@@ -1,2 +1,2 @@
 # react-admin
-react/redux/saga/antd/immutable/webpack
+react/redux/redux-saga/react-router/antd/immutable/webpack

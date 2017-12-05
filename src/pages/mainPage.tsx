@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
-import { Layout, Menu, Breadcrumb, Icon, Button } from 'antd';
+import { Layout, Menu, Breadcrumb, Icon, Button, Dropdown } from 'antd';
 const { Header, Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
-import './mainPage.css';
+import './mainPage.less';
 import { getSideType, getFeatch, handleSideMenu, setOpenKeys } from '../action/mainAction/index';
 import { routerNavJson } from '../routerNavJson';
 import { select } from 'redux-saga/effects';
@@ -28,13 +28,23 @@ class App extends React.Component<AppProps, any> {
   constructor(props) {
     super(props)
   }
-  componentWillMount(){
-    let pathname = window.location.href.indexOf('from') > 0 ? window.location.search.substr(1).split("=")[1] : location.pathname
-    if(pathname==='/'){
-      sessionStorage.clear();
-      this.props.dispatch(handleSideMenu('dashboard'));
-      sessionStorage.setItem('selectKey','dashboard');
+  componentWillMount() {
+    let userInfo = sessionStorage.getItem('userInfo');
+    if (userInfo) {
+      let pathname = window.location.href.indexOf('from') > 0 ? window.location.search.substr(1).split("=")[1] : location.pathname
+      if (pathname === '/') {
+        sessionStorage.clear();
+        const params = {
+          selectKey: 'dashboard',
+          pathName: ['dashboard']
+        }
+        this.props.dispatch(handleSideMenu(params));
+        sessionStorage.setItem('selectKey', 'dashboard');
+      }
+    } else {
+      browserHistory.push('login');
     }
+
   }
   onCollapse = () => {
     const { dispatch } = this.props;
@@ -179,10 +189,21 @@ class App extends React.Component<AppProps, any> {
     const { dispatch } = this.props;
     dispatch(setOpenKeys(openKey));
   }
+  handleClickLogin = (e) => {
+    e.preventDefault();
+    sessionStorage.clear();
+    browserHistory.push('login');
+  }
   render() {
     const { collapsed, featchData, children, openKeys, selectKey, pathName } = this.props;
     const navs = this.renderNav(routerNavJson);
-
+    const menu = (
+      <Menu>
+        <Menu.Item>
+          <a href='#' onClick={this.handleClickLogin}>退出登录</a>
+        </Menu.Item>
+      </Menu>
+    );
     return (
       <Layout style={{ minHeight: '100vh' }}>
         <Sider
@@ -203,13 +224,18 @@ class App extends React.Component<AppProps, any> {
           </Menu>
         </Sider>
         <Layout>
-          <Header style={{ background: '#fff', padding: 0 }}>
-            11
+          <Header style={{ background: '#fff', padding: 0, paddingRight: 10, textAlign: 'right' }}>
+            <Dropdown overlay={menu}>
+              <a className="ant-dropdown-link" href="#" onClick={e => { e.preventDefault() }}>
+                <Icon type="user" />
+                {sessionStorage.getItem('userInfo')}
+              </a>
+            </Dropdown>
           </Header>
           <Content style={{ margin: '0 16px' }}>
             <Breadcrumb style={{ margin: '16px 0' }}>
               {
-                pathName && pathName.map(ele=>{
+                pathName && pathName.map(ele => {
                   return <Breadcrumb.Item className="Item">{routerNavJson[ele].name}</Breadcrumb.Item>
                 })
               }

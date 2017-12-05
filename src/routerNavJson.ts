@@ -1,8 +1,16 @@
 import * as Dashboard from './pages/dashboard';
 import * as Detail from './pages/profile/detail';
 import * as Profile from './pages/profile/index';
+import * as Login from './pages/login';
 
 export const routerNavJson = {
+    'login':{
+        index: 0,
+        path: 'login',
+        component: Login,
+        className: 'login',
+        slideHide: true,
+    },
     'dashboard': {
         index: 1,
         name: "首页",

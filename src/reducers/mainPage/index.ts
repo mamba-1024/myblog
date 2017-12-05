@@ -15,7 +15,7 @@ const initialState = Immutable.fromJS({
     navJson: {},
     routerJson: {},
     openKeys: [''], // menu选中项
-    selectKey: sessionStorage_openKey || '', // 当前选中的key
+    selectKey: sessionStorage_openKey || 'dashboard', // 当前选中的key
     pathName: sessionStorage_pathName || ['dashboard']
 });
 
