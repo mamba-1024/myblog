@@ -15,7 +15,7 @@ module.exports = {
         contentBase: "./build",//本地服务器所加载的页面所在的目录
         historyApiFallback: true,//不跳转
         inline: true,//实时刷新
-        port: 8006        
+        port: 8006
     },
     resolve: {
         extensions: ['.js', '.jsx', '.ts', '.tsx', '.css', '.less', '.json', '.gif', '.html', '.png', '.webp', '.jpg',],
@@ -56,13 +56,19 @@ module.exports = {
                 })
             },
             {
-                test: /\.less$/, 
+                test: /\.less$/,
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
                     use: [
-                        { loader: 'css-loader'}, { loader: 'less-loader' }
+                        { loader: 'css-loader' }, { loader: 'less-loader' }
                     ]
                 })
+            },
+            {
+                test: /\.(jpg|png|gif|jpeg|ico)?$/,
+                use: [
+                    { loader: `url-loader?limit=8190&name=images/[name].[hash:8].[ext]` }
+                ]
             },
 
             // {
@@ -93,7 +99,7 @@ module.exports = {
         new webpack.optimize.CommonsChunkPlugin({
             name: 'common',
             minChunks: 2,
-            filename:"common.js"//忽略则以name为输出文件的名字，否则以此为输出文件名字
+            filename: "common.js"//忽略则以name为输出文件的名字，否则以此为输出文件名字
         }),
         new HtmlWebpackPlugin({
             template: __dirname + "/src/index.tmpl.html"//new 一个这个插件的实例，并传入相关的参数

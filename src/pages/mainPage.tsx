@@ -200,7 +200,7 @@ class App extends React.Component<AppProps, any> {
     const menu = (
       <Menu>
         <Menu.Item>
-          <a href='#' onClick={this.handleClickLogin}>退出登录</a>
+          <a href='#' onClick={this.handleClickLogin}><Icon type="logout" /> 退出登录</a>
         </Menu.Item>
       </Menu>
     );
@@ -212,7 +212,12 @@ class App extends React.Component<AppProps, any> {
           onCollapse={this.onCollapse}
           breakpoint="lg"
         >
-          <div className="logo" />
+          <div className="logo" >
+            <a href="#" onClick={e=>e.preventDefault()}>
+              <img src={require('../../public/favicon.ico')} alt="react-admin"/>
+              <h1>React Admin</h1>
+            </a>
+          </div>
           <Menu
             theme="dark"
             selectedKeys={[selectKey]}
@@ -226,10 +231,10 @@ class App extends React.Component<AppProps, any> {
         <Layout>
           <Header style={{ background: '#fff', padding: 0, paddingRight: 10, textAlign: 'right' }}>
             <Dropdown overlay={menu}>
-              <a className="ant-dropdown-link" href="#" onClick={e => { e.preventDefault() }}>
-                <Icon type="user" />
+              <span className="ant-dropdown-link" onClick={e => { e.preventDefault() }}>
+                <Icon type="user" style={{ marginRight: 6 }} />
                 {sessionStorage.getItem('userInfo')}
-              </a>
+              </span>
             </Dropdown>
           </Header>
           <Content style={{ margin: '0 16px' }}>
@@ -245,8 +250,8 @@ class App extends React.Component<AppProps, any> {
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>
-            Ant Design ©2016 Created by Ant UED
-                </Footer>
+            React Admin ©2018 Created by Huang Ketong
+          </Footer>
         </Layout>
       </Layout>
     );

@@ -1,11 +1,50 @@
 .logo {
-  height: 32px;
-  background: #333;
-  border-radius: 6px;
-  margin: 16px;
+  height: 64px;
+  position: relative;
+  line-height: 64px;
+  padding-left: 16px;
+  -webkit-transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
+  background: #002140;
+  overflow: hidden;
+
+  img{
+    display: inline-block;
+    vertical-align: middle;
+    height: 32px;
+    border-style: none;
+  }
+
+  h1{
+    color: #fff;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 20px;
+    margin: 0 0 0 12px;
+    font-family: 'Myriad Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    font-weight: 600;
+  }
 }
 
 .breadTitle{
   font-size: 16px;
   padding-left: 15px;
+}
+
+.ant-dropdown-link{
+  display: inline-block;
+  height: 100%;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0 12px;
+  -webkit-transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
+}
+.ant-dropdown-link:hover{
+  color: #1890ff;
+}
+.nav-text{
+  font-size: 14px;
 }
