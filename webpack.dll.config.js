@@ -18,7 +18,8 @@ const vendors = [
     'antd/dist/antd.less',
     'rc-queue-anim',
     'babel-polyfill',
-    'lodash'
+    'lodash',
+    'axios'
 ];
 
 module.exports = {

@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "antd": "^2.13.9",
+    "axios": "^0.17.1",
     "babel-polyfill": "^6.26.0",
     "classnames": "^2.2.5",
     "immutable": "^3.8.2",
