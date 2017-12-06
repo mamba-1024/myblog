@@ -10,8 +10,6 @@ import { routerNavJson } from '../routerNavJson';
 import { select } from 'redux-saga/effects';
 import * as _ from 'lodash';
 
-// const logo = require('./logo.svg');
-
 interface AppProps {
   collapsed?: boolean,
   dispatch?: any,
