@@ -30,16 +30,16 @@ String.prototype.humpToHyphen = function () {
 
 // 日期格式化
 // 把时间戳转换为时间格式
-const formatDate = (time) => {
-    let now = new Date(Number(time));
-    let year = now.getFullYear();
-    let month = now.getMonth() + 1;
-    let date = now.getDate();
-    let hour = now.getHours();
-    let minute = now.getMinutes();
-    let second = now.getSeconds();
-    return `${year}-${month}-${date} ${hour}:${minute}:${second}`;
-}
+// const formatDate = (time) => {
+//     let now = new Date(Number(time));
+//     let year = now.getFullYear();
+//     let month = now.getMonth() + 1;
+//     let date = now.getDate();
+//     let hour = now.getHours();
+//     let minute = now.getMinutes();
+//     let second = now.getSeconds();
+//     return `${year}-${month}-${date} ${hour}:${minute}:${second}`;
+// }
 const GetDateStr = (AddDayCount) => {
     const dd = new Date();
     if (AddDayCount === 10) {
@@ -61,23 +61,23 @@ const GetDateStr = (AddDayCount) => {
         return y + "-" + M + "-" + d + " " + h + ":" + m + ":" + "00";
     }
 }
-const getNowFormatDate = () => {
-    const date = new Date();
-    const seperator1 = "-";
-    const seperator2 = ":";
-    let month = date.getMonth() + 1;
-    let strDate = date.getDate();
-    if (month >= 1 && month <= 9) {
-        month = "0" + month;
-    }
-    if (strDate >= 0 && strDate <= 9) {
-        strDate = "0" + strDate;
-    }
-    const currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
-        + " " + date.getHours() + seperator2 + date.getMinutes()
-        + seperator2 + date.getSeconds();
-    return currentdate;
-}
+// const getNowFormatDate = () => {
+//     const date = new Date();
+//     const seperator1 = "-";
+//     const seperator2 = ":";
+//     let month = date.getMonth() + 1;
+//     let strDate = date.getDate();
+//     if (month >= 1 && month <= 9) {
+//         month = "0" + month;
+//     }
+//     if (strDate >= 0 && strDate <= 9) {
+//         strDate = "0" + strDate;
+//     }
+//     const currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+//         + " " + date.getHours() + seperator2 + date.getMinutes()
+//         + seperator2 + date.getSeconds();
+//     return currentdate;
+// }
 /**
  * @param   {String}
  * @return  {String}
@@ -133,14 +133,14 @@ const aryContains = function (arr, obj) {
     return false
 }
 
-const checkPercentageValue = function (value) {
-    let reg = /^[0-9.%]{1,}$/;
-    if (!reg.exec(value)) {
-        message.error("输入百分数值！")
-        return false
-    }
-    return true
-}
+// const checkPercentageValue = function (value) {
+//     let reg = /^[0-9.%]{1,}$/;
+//     if (!reg.exec(value)) {
+//         message.error("输入百分数值！")
+//         return false
+//     }
+//     return true
+// }
 
 // 把小数四舍五百保留2位转为百分数 return String
 Number.prototype.toPercent = function () {
@@ -163,13 +163,13 @@ String.prototype.Trim = function () {
 module.exports = {
     String,
     GetDateStr,
-    getNowFormatDate,
-    formatDate,
+    // getNowFormatDate,
+    // formatDate,
     queryURL,
     queryArray,
     setUrlParams,
     aryContains,
-    checkPercentageValue,
+    // checkPercentageValue,
     Number,
     VERIFY_PHONE_REG,
     VERIFY_REG_CODE,
