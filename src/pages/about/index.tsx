@@ -2,22 +2,20 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import QueueAnim from 'rc-queue-anim';
 
-interface DashboardPropsType {
+interface aboutProps {
 
 }
 
-class Dashboard extends React.Component<DashboardPropsType, any>{
+class About extends React.Component<aboutProps, any>{
     constructor(props) {
-        super(props)
+        super(props);
     }
 
     render() {
         return (
             <QueueAnim delay={500}>
-                <div key='dd'>
-                    <h3>
-                        welcome to my blog!
-                    </h3>
+                <div key='aa'>
+                    about
                 </div>
             </QueueAnim>
         )
@@ -29,5 +27,4 @@ function mapStateToProps(state: any) {
 
     }
 }
-
-export default connect(mapStateToProps)(Dashboard)
+export default connect(mapStateToProps)(About);

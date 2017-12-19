@@ -15,7 +15,7 @@ module.exports = {
         contentBase: "./build",//本地服务器所加载的页面所在的目录
         historyApiFallback: true,//不跳转
         inline: true,//实时刷新
-        port: 8006
+        port: 8008
     },
     resolve: {
         extensions: ['.js', '.jsx', '.ts', '.tsx', '.css', '.less', '.json', '.gif', '.html', '.png', '.webp', '.jpg',],

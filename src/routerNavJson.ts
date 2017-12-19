@@ -1,42 +1,43 @@
 import * as Dashboard from './pages/dashboard';
 import * as Detail from './pages/profile/detail';
 import * as Profile from './pages/profile/index';
-import * as Login from './pages/login';
+import * as Tags from './pages/tags/index';
+import * as About from './pages/about/index';
 
 export const routerNavJson = {
-    'login':{
-        index: 0,
-        path: 'login',
-        component: Login,
-        className: 'login',
-        slideHide: true,
-    },
     'dashboard': {
         index: 1,
         name: "首页",
-        type: "home",
         path: `dashboard`,
         component: Dashboard,
         className: 'homepage'       
     },
     'profiles': {
         index: 2,
-        name: '详情页',
-        type: 'file',
-        children: ['detail', 'profile']
-    },
-    'profile': {
-        index: 4,
-        name: '详情页2',
-        path: 'profile',
+        name: '文章',
+        path: 'profiles',
         component: Profile,
-        parents: ['profile']
+        children: ['detail']
     },
     'detail': {
         index: 3,
         name: '详情页1',
         path: 'detail',
         component: Detail,
-        parents: ['profile']
+        parents: ['profile'],
+        slideHide: true
+    },
+    'tag': {
+        index: 4,
+        name: 'Tag',
+        path: 'tags',
+        component: Tags,
+    },
+    'about': {
+        index: 5,
+        name: 'About',
+        path: 'about',
+        component: About,
     }
+
 }

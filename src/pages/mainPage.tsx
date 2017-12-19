@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
-import { Layout, Menu, Breadcrumb, Icon, Button, Dropdown } from 'antd';
-const { Header, Content, Footer, Sider } = Layout;
+import { Menu, Icon, Button, Dropdown } from 'antd';
 const SubMenu = Menu.SubMenu;
 import './mainPage.less';
 import { getSideType, getFeatch, handleSideMenu, setOpenKeys } from '../action/mainAction/index';
 import { routerNavJson } from '../routerNavJson';
 import { select } from 'redux-saga/effects';
 import * as _ from 'lodash';
+import QueueAnim from 'rc-queue-anim';
 
 interface AppProps {
   collapsed?: boolean,
@@ -195,63 +195,32 @@ class App extends React.Component<AppProps, any> {
   render() {
     const { collapsed, featchData, children, openKeys, selectKey, pathName } = this.props;
     const navs = this.renderNav(routerNavJson);
-    const menu = (
-      <Menu>
-        <Menu.Item>
-          <a href='#' onClick={this.handleClickLogin}><Icon type="logout" /> 退出登录</a>
-        </Menu.Item>
-      </Menu>
-    );
+
     return (
-      <Layout style={{ minHeight: '100vh' }}>
-        <Sider
-          collapsible
-          collapsed={collapsed}
-          onCollapse={this.onCollapse}
-          breakpoint="lg"
-        >
-          <div className="logo" >
-            <a href="#" onClick={e=>e.preventDefault()}>
-              <img src={require('../../public/favicon.ico')} alt="react-admin"/>
-              <h1>React Admin</h1>
-            </a>
-          </div>
-          <Menu
-            theme="dark"
-            selectedKeys={[selectKey]}
-            mode="inline"
-            onClick={this.handleClick.bind(this)}
-            onOpenChange={this.onOpenChange.bind(this)}
-          >
-            {navs}
-          </Menu>
-        </Sider>
-        <Layout>
-          <Header style={{ background: '#fff', padding: 0, paddingRight: 10, textAlign: 'right' }}>
-            <Dropdown overlay={menu}>
-              <span className="ant-dropdown-link" onClick={e => { e.preventDefault() }}>
-                <Icon type="user" style={{ marginRight: 6 }} />
-                {sessionStorage.getItem('userInfo')}
-              </span>
-            </Dropdown>
-          </Header>
-          <Content style={{ margin: '0 16px' }}>
-            <Breadcrumb style={{ margin: '16px 0' }}>
-              {
-                pathName && pathName.map(ele => {
-                  return <Breadcrumb.Item className="Item">{routerNavJson[ele].name}</Breadcrumb.Item>
-                })
-              }
-            </Breadcrumb>
-            <div style={{ padding: 24, background: '#fff', minHeight: 460 }}>
-              {children}
+      <div className='layout'>
+        <QueueAnim delay={300} type='left'>
+          <div className='side' key='sssss'>
+            <div className="logo" >
+              <img src={require('../../public/kobe.jpg')} />
+              <h1>my blog</h1>
             </div>
-          </Content>
-          <Footer style={{ textAlign: 'center' }}>
-            React Admin ©2018 Created by Huang Ketong
-          </Footer>
-        </Layout>
-      </Layout>
+            <Menu
+              selectedKeys={[selectKey]}
+              mode="inline"
+              onClick={this.handleClick.bind(this)}
+              onOpenChange={this.onOpenChange.bind(this)}
+              style={{ width: '70%', margin: '0 auto' }}
+            >
+              {navs}
+            </Menu>
+          </div>
+        </QueueAnim>
+        <div className='contents'>
+          <div style={{ padding: 24, background: '#fff', minHeight: 460 }}>
+            {children}
+          </div>
+        </div>
+      </div>
     );
   }
 }
