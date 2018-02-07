@@ -13,7 +13,8 @@ const stores = createStore(
     indexReduces,
     applyMiddleware(sagaMiddleware)
 );
-for(const saga in getSagaList) {
+
+for (const saga in getSagaList) {
     // sagaRun( getSagaList[saga] )
     sagaMiddleware.run(getSagaList[saga])
 }

@@ -10,7 +10,7 @@ module.exports = {
         filename: "bundle.js",//打包后输出文件的文件名
         chunkFilename: '[name].[chunkhash:5].chunk.js'
     },
-    devtool: 'cheap-module-source-map',
+    devtool: 'cheap-module-eval-source-map',
     devServer: {
         contentBase: "./build",//本地服务器所加载的页面所在的目录
         historyApiFallback: true,//不跳转

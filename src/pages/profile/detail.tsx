@@ -5,8 +5,10 @@ import { Icon } from 'antd';
 import './detail.less';
 import { queryURL } from '../../util/index';
 
-interface detailProps {
 
+interface detailProps {
+    dataSource?: any,
+    dispatch?: any
 }
 
 class Detail extends React.Component<detailProps, any> {
@@ -15,9 +17,11 @@ class Detail extends React.Component<detailProps, any> {
     }
     componentWillMount() {
         const id = queryURL('id');
+        
     }
 
     render() {
+        
         return (
             <QueueAnim delay={700} type='bottom'>
                 <div key='dddddd' className='detail-contents'>
@@ -47,8 +51,9 @@ class Detail extends React.Component<detailProps, any> {
 }
 
 function mapStateToProps(state) {
+    
     return {
-
+        
     }
 }
 

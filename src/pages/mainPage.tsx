@@ -28,20 +28,20 @@ class App extends React.Component<AppProps, any> {
   }
   componentWillMount() {
     let userInfo = sessionStorage.getItem('userInfo');
-    if (userInfo) {
-      let pathname = window.location.href.indexOf('from') > 0 ? window.location.search.substr(1).split("=")[1] : location.pathname
-      if (pathname === '/') {
-        sessionStorage.clear();
-        const params = {
-          selectKey: 'dashboard',
-          pathName: ['dashboard']
-        }
-        this.props.dispatch(handleSideMenu(params));
-        sessionStorage.setItem('selectKey', 'dashboard');
+    // if (userInfo) {
+    let pathname = window.location.href.indexOf('from') > 0 ? window.location.search.substr(1).split("=")[1] : location.pathname
+    if (pathname === '/') {
+      sessionStorage.clear();
+      const params = {
+        selectKey: 'dashboard',
+        pathName: ['dashboard']
       }
-    } else {
-      browserHistory.push('login');
+      this.props.dispatch(handleSideMenu(params));
+      sessionStorage.setItem('selectKey', 'dashboard');
     }
+    // } else {
+    //   browserHistory.push('login');
+    // }
 
   }
   onCollapse = () => {
