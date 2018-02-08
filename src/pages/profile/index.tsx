@@ -11,7 +11,8 @@ import {
     add_article,
     ADD_ARTICLE,
     UPDATE_VISIBLE,
-    UPDATE_FETCHING
+    UPDATE_FETCHING,
+    DELETE_RECORD,
 } from '../../action/profileAction';
 
 interface profileProps {
@@ -79,6 +80,14 @@ class Profile extends React.Component<profileProps, any> {
             content: value
         });
     }
+    handleDelete = (record)=> {
+        console.log(record);
+        this.props.dispatch({
+            type: DELETE_RECORD,
+            params: record
+        });
+    }
+
     columns = [
         {
             title: 'id',
@@ -92,6 +101,10 @@ class Profile extends React.Component<profileProps, any> {
             title: 'content',
             key: 'content',
             dataIndex: 'content'
+        }, {
+            title: '操作',
+            key: 'action',
+            render: (record)=><a href='#' onClick={e=>{e.preventDefault(), this.handleDelete(record)}}>删除</a>
         }
     ];
     render() {

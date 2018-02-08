@@ -5,6 +5,7 @@ const api = 'http://localhost:3000/getArticle';
 const Api = 'http://120.55.189.241:7830/xb-integration/api/v1/weekly/list'
 const addApi = 'http://127.0.0.1:7001/news/add';
 const testApi = 'http://127.0.0.1:7001/news';
+const deleteAPI = 'http://127.0.0.1:7001/news/remove';
 
 export const getArticleList = (params) => {
 
@@ -35,4 +36,13 @@ export const approveRejectAPI = (params) => {
         records: '123456'
     }
     return data
+}
+
+export const deleteRecordApi = (params) => {
+    return request({
+        method: 'put',
+        url: deleteAPI,
+        data: params,
+        headers: {}
+    })
 }

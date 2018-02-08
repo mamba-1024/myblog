@@ -4,6 +4,7 @@ export const RECEIVE_DATA = 'RECEIVE_DATA';
 export const ADD_ARTICLE = 'ADD_ARTICLE';
 export const UPDATE_VISIBLE = 'UPDATE_VISIBLE';
 export const UPDATE_FETCHING = 'UPDATE_FETCHING';
+export const DELETE_RECORD = 'DELETE_RECORD';
 
 // 获取文章列表
 export function get_article_list(params) {
@@ -37,6 +38,13 @@ export function update_visible(params) {
 export function update_fetching(params) {
     return {
         type: UPDATE_FETCHING,
+        params
+    }
+}
+
+export function delete_record(params) {
+    return {
+        type: DELETE_RECORD,
         params
     }
 }
