@@ -16,14 +16,10 @@ class Dashboard extends React.Component<DashboardPropsType, any>{
     constructor(props) {
         super(props)
         this.state = {
-            editorState: EditorState.createEmpty(),
+            
         }
     }
-    onEditorStateChange = (editorState) => {
-        this.setState({ editorState })
-        console.log(editorState);
-    }
-
+    
     render() {
         const {
             editorState
@@ -36,17 +32,6 @@ class Dashboard extends React.Component<DashboardPropsType, any>{
                         welcome to my blog!
                     </h3>
 
-                    <Editor
-                        localization={{ locale: 'zh' }}
-                        wrapperClassName="demo-wrapper"
-                        editorClassName="demo-editor"
-                        initialEditorState={editorState}
-                        onEditorStateChange={this.onEditorStateChange}
-                    />
-                    <textarea
-                        disabled
-                        value={draftToHtml(convertToRaw(editorState.getCurrentContent()))}
-                    />
                 </div>
             </QueueAnim>
         )

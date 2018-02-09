@@ -3,6 +3,7 @@ import * as Detail from './pages/profile/detail';
 import * as Profile from './pages/profile/index';
 import * as Tags from './pages/tags/index';
 import * as About from './pages/about/index';
+import * as NewArticle from './pages/profile/newArticle'
 
 export const routerNavJson = {
     'dashboard': {
@@ -20,12 +21,18 @@ export const routerNavJson = {
         children: ['detail']
     },
     'detail': {
-        index: 3,
+        index: 21,
         name: '详情页1',
         path: 'detail',
         component: Detail,
         parents: ['profile'],
         slideHide: true
+    },
+    'newArticle': {
+        index: 3,
+        name: '新建文章',
+        path: 'newArticle',
+        component: NewArticle,
     },
     'tag': {
         index: 4,
@@ -39,5 +46,4 @@ export const routerNavJson = {
         path: 'about',
         component: About,
     }
-
 }

@@ -8,7 +8,7 @@
     "dll": " rimraf build && webpack --progress --colors --config ./webpack.dll.config.js"
   },
   "dependencies": {
-    "antd": "^2.13.9",
+    "antd": "^3.2.0",
     "axios": "^0.17.1",
     "babel-polyfill": "^6.26.0",
     "classnames": "^2.2.5",
