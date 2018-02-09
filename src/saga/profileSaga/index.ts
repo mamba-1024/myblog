@@ -6,7 +6,8 @@ import {
     receive_data,
     ADD_ARTICLE,
     update_visible,
-    DELETE_RECORD
+    DELETE_RECORD,
+    update_fetching
 } from '../../action/profileAction';
 import {
     getArticleList,
@@ -42,10 +43,12 @@ function* getArticleAsync(obj) {
     const { type, params } = obj;
     switch (type) {
         case GET_ARTICLE_LIST: {
-            yield
             let data = yield getData(params);
             if (data.success) {
                 yield put(receive_data(data.data));
+            }else {
+                yield put(update_fetching(false));
+                message.error(data.message);
             }
         } break;
         case ADD_ARTICLE: {
