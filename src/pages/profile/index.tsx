@@ -38,10 +38,10 @@ class Profile extends React.Component<profileProps, any> {
     componentWillMount() {
         const { dispatch } = this.props;
 
-        dispatch({ type: GET_ARTICLE_LIST, params: {} });
-        dispatch({
-            type: UPDATE_FETCHING, params: true
-        })
+        // dispatch({ type: GET_ARTICLE_LIST, params: {} });
+        // dispatch({
+        //     type: UPDATE_FETCHING, params: true
+        // })
     }
     handleAdd = () => {
         this.props.dispatch({
