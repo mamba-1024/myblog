@@ -7,15 +7,22 @@ import {
     ADD_ARTICLE,
     update_visible,
     DELETE_RECORD,
-    update_fetching
+    update_fetching,
+    GET_ARTICLE_SINGLE,
+    receive_single_data
 } from '../../action/profileAction';
+import {
+    handleSideMenu
+} from '../../action/mainAction'
 import {
     getArticleList,
     approveRejectAPI,
     addArticleApi,
-    deleteRecordApi
+    deleteRecordApi,
+    getArticleSingleApi
 } from '../../api/profile/index';
 import { message } from 'antd';
+import { browserHistory } from 'react-router';
 
 function* getData(params) {
     try {
@@ -38,6 +45,14 @@ function* deleteRecord(params) {
         message.error(error.toString());
     }
 }
+function* getArticleSingle(params) {
+    try {
+        return yield getArticleSingleApi(params)
+    } catch (error) {
+        message.error(error.toString());
+    }
+}
+
 
 function* getArticleAsync(obj) {
     const { type, params } = obj;
@@ -46,7 +61,7 @@ function* getArticleAsync(obj) {
             let data = yield getData(params);
             if (data.success) {
                 yield put(receive_data(data.data));
-            }else {
+            } else {
                 yield put(update_fetching(false));
                 message.error(data.message);
             }
@@ -54,9 +69,19 @@ function* getArticleAsync(obj) {
         case ADD_ARTICLE: {
             let data = yield addArticle(params)
             if (data.success) {
-                message.success('添加成功')
-                yield put(update_visible(false));
-                yield put(get_article_list({}))
+                // 新增成功后跳转到首页
+                message.success('添加成功', 1.5, () => {
+                    browserHistory.push('dashboard');
+                });
+                
+                const params = {
+                    selectKey: 'dashboard',
+                    pathName: ['dashboard']
+                }
+                yield put(handleSideMenu(params))
+                sessionStorage.setItem('selectKey', name);
+                // yield put(update_visible(false));
+                // yield put(get_article_list({}))
             }
         } break;
         case DELETE_RECORD: {
@@ -66,11 +91,17 @@ function* getArticleAsync(obj) {
                 yield put(get_article_list({}))
             }
         } break;
+        case GET_ARTICLE_SINGLE: {
+            let data = yield getArticleSingle(params);
+            if (data.success) {
+                yield put(receive_single_data(data.data));
+            }
+        }
     }
 }
 
 export default function* watchProfilePage() {
     yield* takeEvery([
-        GET_ARTICLE_LIST, ADD_ARTICLE, DELETE_RECORD
+        GET_ARTICLE_LIST, ADD_ARTICLE, DELETE_RECORD, GET_ARTICLE_SINGLE
     ], getArticleAsync)
 }

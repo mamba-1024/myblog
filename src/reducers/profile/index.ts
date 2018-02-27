@@ -2,7 +2,8 @@ import * as Immutable from 'immutable';
 import {
     RECEIVE_DATA,
     UPDATE_VISIBLE,
-    UPDATE_FETCHING
+    UPDATE_FETCHING,
+    RECEIVE_SINGLE_DATA
 } from '../../action/profileAction';
 import { stat } from 'fs';
 import { triggerId } from 'async_hooks';
@@ -11,6 +12,7 @@ const initialState = Immutable.fromJS({
     dataSource: [],
     visible: false,
     fetching: false,
+    article: {}
 });
 
 export const profilePage = (state = initialState, action) => {
@@ -25,6 +27,9 @@ export const profilePage = (state = initialState, action) => {
         };
         case UPDATE_FETCHING: {
             return state.update('fetching', () => Immutable.fromJS(data))
+        };
+        case RECEIVE_SINGLE_DATA: {
+            return state.update('article', () => Immutable.fromJS(data));
         }
         default: return state;
     }

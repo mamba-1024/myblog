@@ -6,6 +6,7 @@ const Api = 'http://120.55.189.241:7830/xb-integration/api/v1/weekly/list'
 const addApi = 'http://127.0.0.1:7001/news/add';
 const testApi = 'http://127.0.0.1:7001/news';
 const deleteAPI = 'http://127.0.0.1:7001/news/remove';
+const SingleApi = 'http://127.0.0.1:7001/news/detail?id=';
 
 export const getArticleList = (params) => {
 
@@ -42,6 +43,15 @@ export const deleteRecordApi = (params) => {
     return request({
         method: 'put',
         url: deleteAPI,
+        data: params,
+        headers: {}
+    })
+}
+
+export const getArticleSingleApi = (params) => {
+    return request({
+        method: 'get',
+        url: `${SingleApi}${params.id}`,
         data: params,
         headers: {}
     })

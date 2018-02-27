@@ -44,14 +44,15 @@ class App extends React.Component<AppProps, any> {
     // }
 
   }
+  
   onCollapse = () => {
     const { dispatch } = this.props;
     dispatch(getSideType())
   }
-  onClick = () => {
-    const { dispatch } = this.props;
-    dispatch(getFeatch())
-  }
+  // onClick = () => {
+  //   const { dispatch } = this.props;
+  //   dispatch(getFeatch())
+  // }
   renderNav = (routerNavJson) => {
     if (this.navNode) {
       return this.navNode;
@@ -64,7 +65,7 @@ class App extends React.Component<AppProps, any> {
         if (!obj) continue;
 
         const {
-					parents,
+          parents,
           children,
           path,
           name,
@@ -72,7 +73,7 @@ class App extends React.Component<AppProps, any> {
           slideHide,
           className,
           index,
-				} = obj;
+        } = obj;
 
 				/**
 				 * 跳过需要隐藏的
@@ -184,6 +185,7 @@ class App extends React.Component<AppProps, any> {
     browserHistory.push(e.key);
   }
   onOpenChange(openKey) {
+    console.log('openKey', openKey)
     const { dispatch } = this.props;
     dispatch(setOpenKeys(openKey));
   }
@@ -193,7 +195,14 @@ class App extends React.Component<AppProps, any> {
     browserHistory.push('login');
   }
   render() {
-    const { collapsed, featchData, children, openKeys, selectKey, pathName } = this.props;
+    const {
+      collapsed,
+      featchData,
+      children,
+      openKeys,
+      selectKey,
+      pathName
+    } = this.props;
     const navs = this.renderNav(routerNavJson);
 
     return (
