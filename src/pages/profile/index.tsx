@@ -79,7 +79,7 @@ class Profile extends React.Component<profileProps, any> {
                                                 <a className='title'
                                                     onClick={e => { e.preventDefault(), this.handleClick(ele.id) }}
                                                 >{ele.title}</a>
-                                                <Button onClick={() => { this.handleDelete(ele) }}>删除</Button>
+                                                {/* <Button onClick={() => { this.handleDelete(ele) }}>删除</Button> */}
                                             </h2>
                                             <div className='post-meta'>
                                                 <span>发表于：</span>
