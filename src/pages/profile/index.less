@@ -43,7 +43,14 @@
 
         .post-content{
             padding-bottom: 30px;
-            border-bottom: 1px solid #f2f2f2;        
+            border-bottom: 1px solid #f2f2f2;
+            // height: 60px;
+            text-overflow: -o-ellipsis-lastline;  
+            overflow: hidden;  
+            text-overflow: ellipsis;  
+            display: -webkit-box;  
+            -webkit-line-clamp: 2; //这儿的数字代表的就是你所需要实现效果的第N行  
+            -webkit-box-orient: vertical; 
         
             p{
                 word-wrap: break-word;

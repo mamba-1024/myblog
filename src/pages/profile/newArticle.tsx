@@ -6,7 +6,8 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { EditorState, convertToRaw, ContentState } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import draftToMarkdown from 'draftjs-to-markdown';
-import { Input, Button, Row, Col, Switch, Icon, Modal, message } from 'antd';
+import { Input, Button, Row, Col, Switch, Icon, Modal, message, Tabs } from 'antd';
+const TabPane = Tabs.TabPane;
 import './newArticle.less';
 import { request } from '../../util/request';
 import 'whatwg-fetch';
@@ -15,6 +16,7 @@ import {
     ADD_ARTICLE,
 } from '../../action/profileAction';
 const { TextArea } = Input;
+const marked = require('marked');
 
 interface newArticlePorps {
     dispatch?: any
@@ -26,7 +28,7 @@ class NewArticle extends React.Component<newArticlePorps, any>{
         this.state = {
             editorState: EditorState.createEmpty(),
             articleTitle: null,
-            articleContent: null,
+            articleContent: '',
             isMarkdown: false, // 是否启用Markdown语法，默认false 不启用
         }
     }
@@ -53,17 +55,17 @@ class NewArticle extends React.Component<newArticlePorps, any>{
         } = this.state;
         const { dispatch } = this.props;
         // 判断是否已经输入标题和内容
-        if(articleTitle&&articleContent){
+        if (articleTitle && articleContent) {
             let params = {
                 title: articleTitle,
                 content: articleContent,
                 isMarkdown: isMarkdown
             };
             dispatch({ type: ADD_ARTICLE, params: params });
-        }else{
+        } else {
             message.warning('请输入文章标题和内容');
         }
-        
+
     }
     uploadCallback(file) {
         let formData = new FormData();
@@ -96,8 +98,8 @@ class NewArticle extends React.Component<newArticlePorps, any>{
             content: isMarkdown ? '是否切换为编辑器输入' : '是否使用Markdown语法编辑',
             okText: '确认',
             cancelText: '取消',
-            onOk: ()=>{
-                this.setState({ isMarkdown: e, articleContent: null })
+            onOk: () => {
+                this.setState({ isMarkdown: e, articleContent: '' })
             },
             onCancel() { },
         });
@@ -111,7 +113,8 @@ class NewArticle extends React.Component<newArticlePorps, any>{
     render() {
         const {
             editorState,
-            isMarkdown
+            isMarkdown,
+            articleContent
         } = this.state;
         const toolbarConfig = {
             options: ['inline', 'blockType', 'fontSize', 'fontFamily', 'list', 'textAlign', 'colorPicker', 'link', 'emoji', 'image', 'remove', 'history'],
@@ -149,9 +152,18 @@ class NewArticle extends React.Component<newArticlePorps, any>{
                         </p>
                         {
                             isMarkdown ?
-                                <TextArea rows={18} placeholder='使用Markdown语法'
-                                    onChange={this.onChangeTextArea}
-                                />
+                                <Tabs>
+                                    <TabPane tab='输入' key='1'>
+                                        <TextArea rows={18} placeholder='使用Markdown语法'
+                                            onChange={this.onChangeTextArea}
+                                        />
+                                    </TabPane>
+                                    <TabPane tab='预览' key='2'>
+                                        <div style={{border: '1px solid #ddd', minHeight: 400, padding: 12}}>
+                                            <div dangerouslySetInnerHTML={{ __html: marked(articleContent) }}></div>
+                                        </div>
+                                    </TabPane>
+                                </Tabs>
                                 :
                                 <Editor
                                     localization={{ locale: 'zh' }}

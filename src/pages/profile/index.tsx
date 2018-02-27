@@ -45,7 +45,7 @@ class Profile extends React.Component<profileProps, any> {
             type: UPDATE_FETCHING, params: true
         })
     }
-    
+
     handleDelete = (record) => {
         this.props.dispatch({
             type: DELETE_RECORD,
@@ -79,6 +79,7 @@ class Profile extends React.Component<profileProps, any> {
                                                 <a className='title'
                                                     onClick={e => { e.preventDefault(), this.handleClick(ele.id) }}
                                                 >{ele.title}</a>
+                                                <Button onClick={() => { this.handleDelete(ele) }}>删除</Button>
                                             </h2>
                                             <div className='post-meta'>
                                                 <span>发表于：</span>
