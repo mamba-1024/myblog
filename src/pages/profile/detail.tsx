@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import QueueAnim from 'rc-queue-anim';
-import { Icon } from 'antd';
+import { Icon, Button } from 'antd';
 import './detail.less';
 import { queryURL } from '../../util/index';
 import {
@@ -9,6 +9,7 @@ import {
 } from '../../action/profileAction';
 import * as moment from 'moment';
 const marked = require('marked');
+import { browserHistory } from 'react-router';
 
 interface detailProps {
     article?: any,
@@ -26,6 +27,9 @@ class Detail extends React.Component<detailProps, any> {
             params: { id: id }
         })
     }
+    handleUpdate = () => {
+        browserHistory.push('update');
+    }
 
     render() {
         const {
@@ -37,8 +41,11 @@ class Detail extends React.Component<detailProps, any> {
                 <div key='dddddd' className='detail-contents'>
                     <h2 className='detail-title'>
                         <a>{article.title}</a>
+                        <Button className='medifyBtn' size='small'
+                            onClick={this.handleUpdate}
+                        >修改</Button>
                     </h2>
-                    <hr/>
+                    <hr />
                     <div className='detail-content'>
                         {
                             article.isMarkdown === 1 ?
@@ -47,7 +54,7 @@ class Detail extends React.Component<detailProps, any> {
                                 <div dangerouslySetInnerHTML={{ __html: article.content }}></div>
                         }
                     </div>
-                    <hr/>
+                    <hr />
                     <div className='post-meta'>
                         <span>发表于：</span>
                         <span>{moment(article.create_time).format('YYYY-MM-DD HH:mm:ss')}</span>

@@ -3,7 +3,8 @@ import * as Detail from './pages/profile/detail';
 import * as Profile from './pages/profile/index';
 import * as Tags from './pages/tags/index';
 import * as About from './pages/about/index';
-import * as NewArticle from './pages/profile/newArticle'
+import * as NewArticle from './pages/profile/newArticle';
+import * as UpdataArticle from './pages/profile/updateArticle';
 
 export const routerNavJson = {
     'dashboard': {
@@ -22,9 +23,17 @@ export const routerNavJson = {
     },
     'detail': {
         index: 21,
-        name: '详情页1',
+        name: '详情页',
         path: 'detail',
         component: Detail,
+        parents: ['profile'],
+        slideHide: true
+    },
+    'update': {
+        index: 22,
+        name: '修改页',
+        path: 'update',
+        component: UpdataArticle,
         parents: ['profile'],
         slideHide: true
     },
