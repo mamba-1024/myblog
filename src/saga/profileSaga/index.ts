@@ -9,7 +9,8 @@ import {
     DELETE_RECORD,
     update_fetching,
     GET_ARTICLE_SINGLE,
-    receive_single_data
+    receive_single_data,
+    UPDATE_RECORD
 } from '../../action/profileAction';
 import {
     handleSideMenu
@@ -19,7 +20,8 @@ import {
     approveRejectAPI,
     addArticleApi,
     deleteRecordApi,
-    getArticleSingleApi
+    getArticleSingleApi,
+    updateRecordApi
 } from '../../api/profile/index';
 import { message } from 'antd';
 import { browserHistory } from 'react-router';
@@ -52,6 +54,13 @@ function* getArticleSingle(params) {
         message.error(error.toString());
     }
 }
+function* updateRecordSaga(params) {
+    try {
+        return yield updateRecordApi(params)
+    } catch (error) {
+        message.error(error.toString());
+    }
+}
 
 
 function* getArticleAsync(obj) {
@@ -73,7 +82,7 @@ function* getArticleAsync(obj) {
                 message.success('添加成功', 1.5, () => {
                     browserHistory.push('dashboard');
                 });
-                
+
                 const params = {
                     selectKey: 'dashboard',
                     pathName: ['dashboard']
@@ -96,12 +105,22 @@ function* getArticleAsync(obj) {
             if (data.success) {
                 yield put(receive_single_data(data.data));
             }
+        } break;
+        case UPDATE_RECORD: {
+            let data = yield updateRecordSaga(params);
+            const id = params.id;
+            if (data.success) {
+                message.success('更新成功', 1.5, () => {
+                    browserHistory.push(`detail?id=${id}`);
+                });
+            }
         }
     }
 }
 
 export default function* watchProfilePage() {
     yield* takeEvery([
-        GET_ARTICLE_LIST, ADD_ARTICLE, DELETE_RECORD, GET_ARTICLE_SINGLE
+        GET_ARTICLE_LIST, ADD_ARTICLE, DELETE_RECORD, GET_ARTICLE_SINGLE,
+        UPDATE_RECORD
     ], getArticleAsync)
 }

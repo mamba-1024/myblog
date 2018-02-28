@@ -7,6 +7,7 @@ const addApi = 'http://127.0.0.1:7001/news/add';
 const testApi = 'http://127.0.0.1:7001/news';
 const deleteAPI = 'http://127.0.0.1:7001/news/remove';
 const SingleApi = 'http://127.0.0.1:7001/news/detail?id=';
+const updateApi = 'http://127.0.0.1:7001/news/update';
 
 export const getArticleList = (params) => {
 
@@ -52,6 +53,15 @@ export const getArticleSingleApi = (params) => {
     return request({
         method: 'get',
         url: `${SingleApi}${params.id}`,
+        data: params,
+        headers: {}
+    })
+}
+
+export const updateRecordApi =  (params) => {
+    return request({
+        method: 'put',
+        url: updateApi,
         data: params,
         headers: {}
     })

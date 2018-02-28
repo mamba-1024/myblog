@@ -35,7 +35,7 @@ class Detail extends React.Component<detailProps, any> {
         const {
             article
         } = this.props;
-        console.log(article);
+        
         return (
             <QueueAnim delay={700} type='bottom'>
                 <div key='dddddd' className='detail-contents'>

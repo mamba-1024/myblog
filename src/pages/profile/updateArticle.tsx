@@ -15,6 +15,7 @@ import { request } from '../../util/request';
 import 'whatwg-fetch';
 import {
     GET_ARTICLE_SINGLE,
+    UPDATE_RECORD
 } from '../../action/profileAction';
 const marked = require('marked');
 
@@ -84,7 +85,7 @@ class UpdateArticle extends React.Component<updateProps, any>{
                 isMarkdown: isMarkdown
             };
             console.log(params);
-            // dispatch({ type: ADD_ARTICLE, params: params });
+            dispatch({ type: UPDATE_RECORD, params: params });
         } else {
             message.warning('请输入文章标题和内容');
         }
@@ -118,7 +119,6 @@ class UpdateArticle extends React.Component<updateProps, any>{
         })
     }
 
-
     render() {
         const {
             article
@@ -129,7 +129,7 @@ class UpdateArticle extends React.Component<updateProps, any>{
             articleTitle,
             isMarkdown
         } = this.state;
-        console.log('****', editorState);
+        
         const toolbarConfig = {
             options: ['inline', 'blockType', 'fontSize', 'fontFamily', 'list', 'textAlign', 'colorPicker', 'link', 'emoji', 'image', 'remove', 'history'],
             image: {

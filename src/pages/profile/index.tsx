@@ -68,7 +68,7 @@ class Profile extends React.Component<profileProps, any> {
 
         return (
             <Spin spinning={fetching} size='large'>
-                <QueueAnim delay={500}>
+                <QueueAnim delay={500} duration={1000}>
                     <div key='pp' className='profile-content'>
                         {
                             dataSource.length > 0 && dataSource.map(ele => {

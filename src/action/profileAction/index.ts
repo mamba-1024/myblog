@@ -7,6 +7,7 @@ export const UPDATE_FETCHING = 'UPDATE_FETCHING';
 export const DELETE_RECORD = 'DELETE_RECORD';
 export const GET_ARTICLE_SINGLE = 'GET_ARTICLE_SINGLE';
 export const RECEIVE_SINGLE_DATA = 'RECEIVE_SINGLE_DATA';
+export const UPDATE_RECORD = 'UPDATE_RECORD';
 
 // 获取文章列表
 export function get_article_list(params) {
@@ -61,6 +62,13 @@ export function get_article_single(params) {
 export function receive_single_data(params) {
     return {
         type: RECEIVE_SINGLE_DATA,
+        params
+    }
+}
+
+export function update_record(params) {
+    return {
+        type: UPDATE_RECORD,
         params
     }
 }
