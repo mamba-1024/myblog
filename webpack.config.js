@@ -86,11 +86,11 @@ module.exports = {
     plugins: [
         new webpack.HotModuleReplacementPlugin(),//热加载插件
         new webpack.optimize.OccurrenceOrderPlugin(),
-        // new webpack.DefinePlugin({
-        //     'process.env': {
-        //         NODE_ENV: '"production"'
-        //     }
-        // }),
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: '"development"'
+            }
+        }),
         new ExtractTextPlugin({ filename: 'bundle.css', allChunks: true }),
         new webpack.DllReferencePlugin({
             manifest: require('./build/manifest.json'), // 指定manifest.json

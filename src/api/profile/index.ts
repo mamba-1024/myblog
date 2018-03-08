@@ -1,23 +1,33 @@
 import { fetchFn } from '../../util/fetch';
 import { request } from '../../util/request';
 
-const api = 'http://localhost:3000/getArticle';
-const Api = 'http://120.55.189.241:7830/xb-integration/api/v1/weekly/list'
-const addApi = 'http://127.0.0.1:7001/news/add';
-const testApi = 'http://127.0.0.1:7001/news';
-const deleteAPI = 'http://127.0.0.1:7001/news/remove';
-const SingleApi = 'http://127.0.0.1:7001/news/detail?id=';
-const updateApi = 'http://127.0.0.1:7001/news/update';
+let API;
+let dev_api = 'http://192.168.4.177:7001';
+let prod_api = '';
 
-const registAPI = 'http://127.0.0.1:7001/news/regist';
-const loginAPI = 'http://127.0.0.1:7001/news/login'
+if(process.env.NODE_ENV==='development'){
+    console.log('dev');
+    API = dev_api;
+}else if(process.env.NODE_ENV==='production'){
+    console.log('prod');
+    API = prod_api;
+}
+
+const addApi = `${API}/news/add`;
+const searchApi = `${API}/news`;
+const deleteAPI = `${API}/news/remove`;
+const SingleApi = `${API}/news/detail?id=`;
+const updateApi = `${API}/news/update`;
+
+const registAPI = `${API}/news/regist`;
+const loginAPI = `${API}/news/login`;
 
 export const getArticleList = (params) => {
 
-    // return fetchFn(testApi, {}).then(data => data);
+    // return fetchFn(searchApi, {}).then(data => data);
     return request({
         method: 'get',
-        url: testApi,
+        url: searchApi,
         data: params,
         headers: {}
     });
