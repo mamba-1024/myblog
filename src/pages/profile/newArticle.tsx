@@ -56,10 +56,12 @@ class NewArticle extends React.Component<newArticlePorps, any>{
         const { dispatch } = this.props;
         // 判断是否已经输入标题和内容
         if (articleTitle && articleContent) {
+            const userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
             let params = {
                 title: articleTitle,
                 content: articleContent,
-                isMarkdown: isMarkdown
+                isMarkdown: isMarkdown,
+                userId: userInfo.userId
             };
             dispatch({ type: ADD_ARTICLE, params: params });
         } else {

@@ -9,13 +9,16 @@ const deleteAPI = 'http://127.0.0.1:7001/news/remove';
 const SingleApi = 'http://127.0.0.1:7001/news/detail?id=';
 const updateApi = 'http://127.0.0.1:7001/news/update';
 
+const registAPI = 'http://127.0.0.1:7001/news/regist';
+const loginAPI = 'http://127.0.0.1:7001/news/login'
+
 export const getArticleList = (params) => {
 
     // return fetchFn(testApi, {}).then(data => data);
     return request({
         method: 'get',
         url: testApi,
-        data: {},
+        data: params,
         headers: {}
     });
 }
@@ -62,6 +65,24 @@ export const updateRecordApi =  (params) => {
     return request({
         method: 'put',
         url: updateApi,
+        data: params,
+        headers: {}
+    })
+}
+
+export const registApi = (params)=>{
+    return request({
+        method: 'post',
+        url: registAPI,
+        data: params,
+        headers: {}
+    })
+}
+
+export const loginApi = (params)=>{
+    return request({
+        method: 'post',
+        url: loginAPI,
         data: params,
         headers: {}
     })

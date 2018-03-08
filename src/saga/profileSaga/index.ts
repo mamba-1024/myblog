@@ -97,7 +97,12 @@ function* getArticleAsync(obj) {
             let data = yield deleteRecord(params);
             if (data.success) {
                 message.success('删除成功');
-                yield put(get_article_list({}))
+                const userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
+                const params = {
+                    userId: userInfo.userId,
+                    role: userInfo.role
+                }
+                yield put(get_article_list(params))
             }
         } break;
         case GET_ARTICLE_SINGLE: {

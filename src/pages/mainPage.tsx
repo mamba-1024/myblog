@@ -28,7 +28,7 @@ class App extends React.Component<AppProps, any> {
   }
   componentWillMount() {
     let userInfo = sessionStorage.getItem('userInfo');
-    // if (userInfo) {
+    if (userInfo) {
     let pathname = window.location.href.indexOf('from') > 0 ? window.location.search.substr(1).split("=")[1] : location.pathname
     if (pathname === '/') {
       sessionStorage.clear();
@@ -39,12 +39,23 @@ class App extends React.Component<AppProps, any> {
       this.props.dispatch(handleSideMenu(params));
       sessionStorage.setItem('selectKey', 'dashboard');
     }
-    // } else {
-    //   browserHistory.push('login');
-    // }
-
+    } else {
+      browserHistory.push('login');
+    }
   }
-  
+  componentDidMount(){
+    this.checkUserInfo();
+  }
+  checkUserInfo = ()=>{
+    let userInfo = sessionStorage.getItem('userInfo');
+    console.log(userInfo);
+    if(userInfo){
+      return
+    }else{
+      browserHistory.push('login');
+    }
+  }
+
   onCollapse = () => {
     const { dispatch } = this.props;
     dispatch(getSideType())
@@ -183,9 +194,12 @@ class App extends React.Component<AppProps, any> {
     dispatch(handleSideMenu(params));
     sessionStorage.setItem('selectKey', e.key);
     browserHistory.push(e.key);
+    // 如果是点击登出，清除登录信息
+    if (e.key === 'login') {
+      sessionStorage.removeItem('userInfo');
+    }
   }
   onOpenChange(openKey) {
-    console.log('openKey', openKey)
     const { dispatch } = this.props;
     dispatch(setOpenKeys(openKey));
   }
@@ -195,6 +209,7 @@ class App extends React.Component<AppProps, any> {
     browserHistory.push('login');
   }
   render() {
+    
     const {
       collapsed,
       featchData,
@@ -225,7 +240,7 @@ class App extends React.Component<AppProps, any> {
           </div>
         </QueueAnim>
         <div className='contents'>
-          <div style={{ padding: 24, background: '#fff', minHeight: 460 }}>
+          <div style={{ padding: 24, background: '#fff' }}>
             {children}
           </div>
         </div>

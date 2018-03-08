@@ -5,6 +5,7 @@ import * as Tags from './pages/tags/index';
 import * as About from './pages/about/index';
 import * as NewArticle from './pages/profile/newArticle';
 import * as UpdataArticle from './pages/profile/updateArticle';
+import * as Login from './pages/login/index';
 
 export const routerNavJson = {
     'dashboard': {
@@ -54,5 +55,12 @@ export const routerNavJson = {
         name: 'About',
         path: 'about',
         component: About,
+    },
+    'login': {
+        index: 6,
+        name: '登出',
+        path: 'login',
+        component: Login,
+        // slideHide: true
     }
 }

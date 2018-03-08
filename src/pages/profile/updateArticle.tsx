@@ -78,13 +78,14 @@ class UpdateArticle extends React.Component<updateProps, any>{
         const { dispatch } = this.props;
         // 判断是否已经输入标题和内容
         if (articleTitle && articleContent) {
+            
             let params = {
                 ...article,
                 title: articleTitle,
                 content: articleContent,
                 isMarkdown: isMarkdown
             };
-            console.log(params);
+            
             dispatch({ type: UPDATE_RECORD, params: params });
         } else {
             message.warning('请输入文章标题和内容');

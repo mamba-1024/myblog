@@ -5,8 +5,6 @@ import {
     UPDATE_FETCHING,
     RECEIVE_SINGLE_DATA
 } from '../../action/profileAction';
-import { stat } from 'fs';
-import { triggerId } from 'async_hooks';
 
 const initialState = Immutable.fromJS({
     dataSource: [],

@@ -9,7 +9,7 @@ import draftToHtml from 'draftjs-to-html';
 
 
 interface DashboardPropsType {
-
+    isDoing?: any
 }
 
 class Dashboard extends React.Component<DashboardPropsType, any>{
@@ -38,9 +38,10 @@ class Dashboard extends React.Component<DashboardPropsType, any>{
     }
 }
 
-function mapStateToProps(state: any) {
+function mapStateToProps(state?: any) {
+    let loginData = state.get('loginPage');
     return {
-
+        isDoing: loginData.get('isDoing')
     }
 }
 

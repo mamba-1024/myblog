@@ -39,8 +39,12 @@ class Profile extends React.Component<profileProps, any> {
 
     componentWillMount() {
         const { dispatch } = this.props;
-
-        dispatch({ type: GET_ARTICLE_LIST, params: {} });
+        const userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
+        const params = {
+            userId: userInfo.userId,
+            role: userInfo.role
+        }
+        dispatch({ type: GET_ARTICLE_LIST, params: params });
         dispatch({
             type: UPDATE_FETCHING, params: true
         })
@@ -105,6 +109,12 @@ class Profile extends React.Component<profileProps, any> {
                                 )
                             })
 
+                        }
+                        {
+                            dataSource.length === 0 && 
+                            <div className='blankArticle'>
+                                <span>暂无</span>
+                            </div>
                         }
                         {/* <article className='post-article'>
                         <header className='post-header'>

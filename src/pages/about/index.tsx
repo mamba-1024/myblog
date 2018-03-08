@@ -22,9 +22,10 @@ class About extends React.Component<aboutProps, any>{
     }
 }
 
-function mapStateToProps(state: any) {
-    return {
+function mapStateToProps(state?: any) {
 
+    return {
+        
     }
 }
 export default connect(mapStateToProps)(About);

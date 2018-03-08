@@ -5,7 +5,8 @@
   "scripts": {
     "start": "webpack",
     "dev": "webpack-dev-server --open --progress --colors",
-    "dll": " rimraf build && webpack --progress --colors --config ./webpack.dll.config.js"
+    "build": "webpack --progress --colors --config ./webpack.product.config.js",
+    "dll": "webpack --progress --colors --config ./webpack.dll.config.js"
   },
   "dependencies": {
     "antd": "^3.2.0",

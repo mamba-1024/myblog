@@ -123,7 +123,7 @@ const VERIFY_TRUENAME_REG = /^[\u4e00-\u9fa5]+(·[\u4e00-\u9fa5]+)*$/;
 String.prototype.Trim = function () {
     return this.replace(/\s/g, "");
 }
-/*
+
 module.exports = {
     String,
     GetDateStr,
@@ -137,4 +137,3 @@ module.exports = {
     VERIFY_IDCARD_REG,
     VERIFY_TRUENAME_REG,
 }
-*/
