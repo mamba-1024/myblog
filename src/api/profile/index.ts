@@ -3,7 +3,7 @@ import { request } from '../../util/request';
 
 let API;
 let dev_api = 'http://192.168.4.177:7001';
-let prod_api = '';
+let prod_api = 'http://120.27.11.104:7001';
 
 if(process.env.NODE_ENV==='development'){
     console.log('dev');
