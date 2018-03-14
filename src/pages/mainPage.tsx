@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
-import { Menu, Icon, Button, Dropdown } from 'antd';
+import { Menu, Icon, Button, Dropdown, message } from 'antd';
 const SubMenu = Menu.SubMenu;
 import './mainPage.less';
 import { getSideType, getFeatch, handleSideMenu, setOpenKeys } from '../action/mainAction/index';
@@ -29,29 +29,29 @@ class App extends React.Component<AppProps, any> {
   componentWillMount() {
     let userInfo = sessionStorage.getItem('userInfo');
     if (userInfo) {
-    let pathname = window.location.href.indexOf('from') > 0 ? window.location.search.substr(1).split("=")[1] : location.pathname
-    if (pathname === '/') {
-      sessionStorage.clear();
-      const params = {
-        selectKey: 'dashboard',
-        pathName: ['dashboard']
+      let pathname = window.location.href.indexOf('from') > 0 ? window.location.search.substr(1).split("=")[1] : location.pathname
+      if (pathname === '/') {
+        sessionStorage.clear();
+        const params = {
+          selectKey: 'dashboard',
+          pathName: ['dashboard']
+        }
+        this.props.dispatch(handleSideMenu(params));
+        sessionStorage.setItem('selectKey', 'dashboard');
       }
-      this.props.dispatch(handleSideMenu(params));
-      sessionStorage.setItem('selectKey', 'dashboard');
-    }
     } else {
       browserHistory.push('login');
     }
   }
-  componentDidMount(){
+  componentDidMount() {
     this.checkUserInfo();
   }
-  checkUserInfo = ()=>{
+  checkUserInfo = () => {
     let userInfo = sessionStorage.getItem('userInfo');
-    console.log(userInfo);
-    if(userInfo){
+
+    if (userInfo) {
       return
-    }else{
+    } else {
       browserHistory.push('login');
     }
   }
@@ -184,19 +184,27 @@ class App extends React.Component<AppProps, any> {
     return this.navNode;
   }
   handleClick(e) {
-    sessionStorage.setItem('pathName', JSON.stringify(e.keyPath.reverse()));
+    let userInfo = sessionStorage.getItem('userInfo');
 
-    const { dispatch } = this.props;
-    const params = {
-      selectKey: e.key,
-      pathName: e.keyPath
-    }
-    dispatch(handleSideMenu(params));
-    sessionStorage.setItem('selectKey', e.key);
-    browserHistory.push(e.key);
-    // 如果是点击登出，清除登录信息
-    if (e.key === 'login') {
-      sessionStorage.removeItem('userInfo');
+    if (userInfo) {
+      sessionStorage.setItem('pathName', JSON.stringify(e.keyPath.reverse()));
+
+      const { dispatch } = this.props;
+      const params = {
+        selectKey: e.key,
+        pathName: e.keyPath
+      }
+      dispatch(handleSideMenu(params));
+      sessionStorage.setItem('selectKey', e.key);
+      browserHistory.push(e.key);
+      // 如果是点击登出，清除登录信息
+      if (e.key === 'login') {
+        sessionStorage.removeItem('userInfo');
+      }
+    } else {
+      message.warning('请重新登陆!', 1, () => {
+        browserHistory.push('login');
+      });
     }
   }
   onOpenChange(openKey) {
@@ -209,7 +217,7 @@ class App extends React.Component<AppProps, any> {
     browserHistory.push('login');
   }
   render() {
-    
+
     const {
       collapsed,
       featchData,
