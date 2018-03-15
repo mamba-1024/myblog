@@ -40,14 +40,18 @@ class Profile extends React.Component<profileProps, any> {
     componentWillMount() {
         const { dispatch } = this.props;
         const userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
-        const params = {
-            userId: userInfo.userId,
-            role: userInfo.role
+        if(userInfo){
+            const params = {
+                userId: userInfo.userId,
+                role: userInfo.role
+            }
+            dispatch({ type: GET_ARTICLE_LIST, params: params });
+            dispatch({
+                type: UPDATE_FETCHING, params: true
+            })
+        }else{
+            browserHistory.push(`login`);
         }
-        dispatch({ type: GET_ARTICLE_LIST, params: params });
-        dispatch({
-            type: UPDATE_FETCHING, params: true
-        })
     }
 
     handleDelete = (record) => {
