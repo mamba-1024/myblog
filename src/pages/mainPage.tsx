@@ -228,7 +228,10 @@ class App extends React.Component<AppProps, any> {
     } = this.props;
     const navs = this.renderNav(routerNavJson);
     let userInfo = sessionStorage.getItem('userInfo');
-    const userName = JSON.parse(userInfo).userName;
+    let userName ;
+    if(userInfo){
+      userName = JSON.parse(userInfo).userName;
+    }
 
     return (
       <div className='layout'>
