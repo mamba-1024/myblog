@@ -65,9 +65,15 @@ module.exports = {
         }
     }),
     new webpack.optimize.UglifyJsPlugin({
+        beautify: false,
+        minimize: true,
         compress: {
-            warnings: false
-        }
+            screw_ie8: false,
+            warnings: false /* 不显示js规范的警告、提示 */
+        },
+        output: { screw_ie8: false },
+        mangle: { screw_ie8: false },
+        support_ie8: true
     }),
     new webpack.DllPlugin({
       path: path.resolve(__dirname, 'build/manifest.json'), // 本Dll文件中各模块的索引，供DllReferencePlugin读取使用

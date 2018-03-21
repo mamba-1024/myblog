@@ -78,9 +78,19 @@ module.exports = {
         ]
     },
     plugins: [
-        // new webpack.HotModuleReplacementPlugin(),//热加载插件
+        new webpack.HotModuleReplacementPlugin(),
         new webpack.optimize.OccurrenceOrderPlugin(),
-        new webpack.optimize.UglifyJsPlugin(),
+        new webpack.optimize.UglifyJsPlugin({
+            beautify: false,
+            minimize: true,
+            compress: {
+                screw_ie8: false,
+                warnings: false /* 不显示js规范的警告、提示 */
+            },
+            output: { screw_ie8: false },
+            mangle: { screw_ie8: false },
+            support_ie8: true
+        }),
         new webpack.DefinePlugin({
             'process.env': {
                 NODE_ENV: '"production"'
