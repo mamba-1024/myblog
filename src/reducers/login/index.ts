@@ -8,6 +8,7 @@ import {
 const initialState = Immutable.fromJS({
     isDoing: 'login', // 判断是登录还是注册
     loading: false,
+    userInfo: {}
 });
 
 export const loginPage = (state = initialState, action) => {

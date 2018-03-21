@@ -18,17 +18,25 @@ interface AppProps {
   history?: any,
   openKeys?: any,
   selectKey?: any,
-  pathName?: any
+  pathName?: any,
+  userInfo?: any
 }
 
 class App extends React.Component<AppProps, any> {
   navNode: Array<any>;
   constructor(props) {
     super(props)
+    this.state = {
+      userName: null
+    }
   }
   componentWillMount() {
     let userInfo = sessionStorage.getItem('userInfo');
+
     if (userInfo) {
+      const userName = JSON.parse(userInfo).userName;
+      this.setState({ userName });
+
       let pathname = window.location.href.indexOf('from') > 0 ? window.location.search.substr(1).split("=")[1] : location.pathname
       if (pathname === '/') {
         sessionStorage.clear();
@@ -224,14 +232,10 @@ class App extends React.Component<AppProps, any> {
       children,
       openKeys,
       selectKey,
-      pathName
+      pathName,
+      userInfo
     } = this.props;
     const navs = this.renderNav(routerNavJson);
-    let userInfo = sessionStorage.getItem('userInfo');
-    let userName ;
-    if(userInfo){
-      userName = JSON.parse(userInfo).userName;
-    }
 
     return (
       <div className='layout'>
@@ -239,7 +243,7 @@ class App extends React.Component<AppProps, any> {
           <div key='0'>
             <div className="logo">
               <img src={require('../../public/kobe.jpg')} />
-              <h2>{userName}</h2>
+              <h2>{userInfo.userName ? userInfo.userName : this.state.userName}</h2>
             </div>
             <Menu
               selectedKeys={[selectKey]}
@@ -269,7 +273,8 @@ function mapStateToProps(state: any) {
     featchData: data.get('featchData'),
     openKeys: data.get('openKeys'),
     selectKey: data.get('selectKey'),
-    pathName: data.get('pathName')
+    pathName: data.get('pathName'),
+    userInfo: state.getIn(['loginPage', 'userInfo']).toJS()
   }
 }
 export default connect(mapStateToProps)(App);

@@ -48,7 +48,6 @@ function* loginAsync(obj) {
         } break;
         case LOGIN_ACTION: {
             let data = yield login(params);
-            console.log(data);
             if (data.success && data.data.flag) {
                 message.success('登陆成功');
                 browserHistory.push('dashboard');
@@ -59,6 +58,9 @@ function* loginAsync(obj) {
                 yield put(handleSideMenu(params));
                 sessionStorage.setItem('selectKey', name);
                 sessionStorage.setItem('userInfo', JSON.stringify(data.data.userInfo));
+
+                yield put(update_state({userInfo: data.data.userInfo}));
+
             } else if (data.success && data.data.flag === false) {
                 message.warning(data.data.statusText);
             } else {
