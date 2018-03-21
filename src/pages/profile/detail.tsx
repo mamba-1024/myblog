@@ -45,6 +45,10 @@ class Detail extends React.Component<detailProps, any> {
                             onClick={this.handleUpdate}
                         >修改</Button>
                     </h2>
+                    <div className='summary'>
+                        {/* <h4>前面的话</h4> */}
+                        <p>概要: {article.summary}</p>
+                    </div>
                     <hr />
                     <div className='detail-content'>
                         {

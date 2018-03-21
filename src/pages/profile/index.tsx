@@ -15,6 +15,7 @@ import {
     DELETE_RECORD,
 } from '../../action/profileAction';
 const marked = require('marked');
+import * as moment from 'moment';
 // import highlight from 'highlight.js';
 
 interface profileProps {
@@ -91,7 +92,7 @@ class Profile extends React.Component<profileProps, any> {
                                             </h2>
                                             <div className='post-meta'>
                                                 <span>发表于：</span>
-                                                <span>2017-12-19</span>
+                                                <span>{moment(ele.create_time).format('YYYY-MM-DD HH:mm:ss')}</span>
                                                 <span> | </span>
                                                 <span><Icon type="tags" /></span>
                                                 {/* <span>
@@ -101,13 +102,15 @@ class Profile extends React.Component<profileProps, any> {
                                             </div>
                                         </header>
                                         <div className='post-content'>
-                                            {
+                                            文章概要：{
+                                                ele.summary
+                                            }
+                                            {/* {
                                                 ele.isMarkdown === 1 ?
                                                     <div dangerouslySetInnerHTML={{ __html: marked(ele.content) }}></div>
                                                     :
                                                     <div dangerouslySetInnerHTML={{ __html: ele.content }}></div>
-                                            }
-
+                                            } */}
                                         </div>
                                     </article>
                                 )

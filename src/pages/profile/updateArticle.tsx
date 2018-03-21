@@ -30,6 +30,7 @@ class UpdateArticle extends React.Component<updateProps, any>{
         this.state = {
             editorState: undefined,
             articleTitle: null,
+            articleSummary: null,
             articleContent: '',
             isMarkdown: false, // 是否启用Markdown语法，默认false 不启用
         }
@@ -39,7 +40,8 @@ class UpdateArticle extends React.Component<updateProps, any>{
         const isMarkdown = article.isMarkdown;
         const articleTitle = article.title;
         const articleContent = article.content;
-        
+        const articleSummary = article.summary;
+
         /*  https://github.com/jpuri/html-to-draftjs
             https://github.com/jpuri/react-draft-wysiwyg/issues/417
         */
@@ -47,12 +49,13 @@ class UpdateArticle extends React.Component<updateProps, any>{
         const { contentBlocks, entityMap } = blocksFromHtml;
         const contentState = ContentState.createFromBlockArray(contentBlocks, entityMap);
         const editorState = EditorState.createWithContent(contentState);
-        
+
         this.setState({
             isMarkdown,
             articleTitle,
             articleContent,
-            editorState
+            editorState,
+            articleSummary
         });
     }
     onEditorStateChange = (editorState) => {
@@ -67,9 +70,16 @@ class UpdateArticle extends React.Component<updateProps, any>{
             articleTitle: value
         });
     }
+    handleSummary = (e) => {
+        let value = e.target.value;
+        this.setState({
+            articleSummary: value
+        });
+    }
     handleCommit = () => {
         const {
             articleTitle,
+            articleSummary,
             articleContent,
             isMarkdown
         } = this.state;
@@ -78,17 +88,18 @@ class UpdateArticle extends React.Component<updateProps, any>{
         const { dispatch } = this.props;
         // 判断是否已经输入标题和内容
         if (articleTitle && articleContent) {
-            
+
             let params = {
                 ...article,
                 title: articleTitle,
+                summary: articleSummary,
                 content: articleContent,
                 isMarkdown: isMarkdown
             };
-            
+
             dispatch({ type: UPDATE_RECORD, params: params });
         } else {
-            message.warning('请输入文章标题和内容');
+            message.warning('标题、概要和内容都必填');
         }
 
     }
@@ -128,9 +139,10 @@ class UpdateArticle extends React.Component<updateProps, any>{
             editorState,
             articleContent,
             articleTitle,
-            isMarkdown
+            isMarkdown,
+            articleSummary
         } = this.state;
-        
+
         const toolbarConfig = {
             options: ['inline', 'blockType', 'fontSize', 'fontFamily', 'list', 'textAlign', 'colorPicker', 'link', 'emoji', 'image', 'remove', 'history'],
             image: {
@@ -157,6 +169,17 @@ class UpdateArticle extends React.Component<updateProps, any>{
                                     onChange={this.handleInput}
                                     size='large'
                                     value={articleTitle}
+                                />
+                            </div>
+                        </div>
+                        <div className='Summary'>
+                            <p>文章概要:</p>
+                            <div >
+                                <TextArea
+                                    placeholder='请输入文章概要'
+                                    onChange={this.handleSummary}
+                                    value={articleSummary}
+                                    rows={3}
                                 />
                             </div>
                         </div>

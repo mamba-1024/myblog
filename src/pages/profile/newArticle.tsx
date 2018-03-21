@@ -27,8 +27,9 @@ class NewArticle extends React.Component<newArticlePorps, any>{
         super(props);
         this.state = {
             editorState: EditorState.createEmpty(),
-            articleTitle: null,
-            articleContent: '',
+            articleTitle: null, // 文章标题
+            articleSummary: null, // 文章概要
+            articleContent: '', // 文章内容
             isMarkdown: false, // 是否启用Markdown语法，默认false 不启用
         }
     }
@@ -47,25 +48,34 @@ class NewArticle extends React.Component<newArticlePorps, any>{
             articleTitle: value
         });
     }
+    handleSummary = (e) => {
+        let value = e.target.value;
+        this.setState({
+            articleSummary: value
+        });
+    }
     handleCommit = () => {
         const {
             articleTitle,
+            articleSummary,
             articleContent,
             isMarkdown
         } = this.state;
         const { dispatch } = this.props;
         // 判断是否已经输入标题和内容
-        if (articleTitle && articleContent) {
+        if (articleTitle && articleContent && articleSummary) {
             const userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
             let params = {
                 title: articleTitle,
+                summary: articleSummary,
                 content: articleContent,
                 isMarkdown: isMarkdown,
                 userId: userInfo.userId
             };
             dispatch({ type: ADD_ARTICLE, params: params });
+
         } else {
-            message.warning('请输入文章标题和内容');
+            message.warning('标题、概要和内容都必填');
         }
 
     }
@@ -141,7 +151,19 @@ class NewArticle extends React.Component<newArticlePorps, any>{
                         <div >
                             <Input style={{ width: '50%' }}
                                 onChange={this.handleInput}
-                                size='large' />
+                                placeholder='请输入文章标题'
+                                size='large'
+                            />
+                        </div>
+                    </div>
+                    <div className='Summary'>
+                        <p>文章概要:</p>
+                        <div >
+                            <TextArea
+                                placeholder='请输入文章概要'
+                                onChange={this.handleSummary}
+                                rows={3}
+                            />
                         </div>
                     </div>
                     <div className='articleContent'>
@@ -161,7 +183,7 @@ class NewArticle extends React.Component<newArticlePorps, any>{
                                         />
                                     </TabPane>
                                     <TabPane tab='预览' key='2'>
-                                        <div style={{border: '1px solid #ddd', minHeight: 400, padding: 12}}>
+                                        <div style={{ border: '1px solid #ddd', minHeight: 400, padding: 12 }}>
                                             <div dangerouslySetInnerHTML={{ __html: marked(articleContent) }}></div>
                                         </div>
                                     </TabPane>

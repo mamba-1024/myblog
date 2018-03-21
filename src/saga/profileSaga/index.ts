@@ -80,12 +80,12 @@ function* getArticleAsync(obj) {
             if (data.success) {
                 // 新增成功后跳转到首页
                 message.success('添加成功', 1.5, () => {
-                    browserHistory.push('dashboard');
+                    browserHistory.push('profiles');
                 });
 
                 const params = {
-                    selectKey: 'dashboard',
-                    pathName: ['dashboard']
+                    selectKey: 'profiles',
+                    pathName: ['profiles']
                 }
                 yield put(handleSideMenu(params))
                 sessionStorage.setItem('selectKey', name);
