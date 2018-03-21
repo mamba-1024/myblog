@@ -5,11 +5,40 @@
         font-size: 26px;
         font-weight: 400;
         a{
-            display: inline-block;
+            position: relative;
             color: #555;
-            border-bottom: 1px solid transparent;
             line-height: 1.2;
             vertical-align: top;
+        }
+        a:before{
+            content: '';
+            position: absolute;
+            z-index: -1;
+            height: 2px;
+            bottom: -4px;
+            left: 51%;
+            right: 51%;
+            background: #108ee9;
+
+            transition-duration: 0.4s;
+            transition-property: right, left;
+            transition-timing-function: ease-out;
+            /* Firefox 4 */
+            -moz-transition-property: right, left;
+            -moz-transition-duration: 0.4s;
+            -moz-transition-timing-function: ease-out;
+            /* Safari and Chrome */
+            -webkit-transition-property: right, left;
+            -webkit-transition-duration: 0.4s;
+            -webkit-transition-timing-function: ease-out;
+            /* Opera */
+            -o-transition-property: right, left;
+            -o-transition-duration: 0.4s;
+            -o-transition-timing-function: ease-out;
+        }
+        a:hover:before {
+            left: 0;
+            right: 0;
         }
         .medifyBtn{
             float: right;

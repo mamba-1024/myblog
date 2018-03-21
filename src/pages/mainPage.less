@@ -1,8 +1,10 @@
 .layout{
   overflow: hidden;
+  width: 1200px;
+  margin: 0 auto;
+
   .side{
-    position: fixed;
-    left: 0;
+    float: left;
     height: 100%;
     width: 25%;    
     text-align: center;
@@ -17,21 +19,39 @@
       transition: all .3s;
       // background: #002140;
       overflow: hidden;
-      margin-top: 20%;
+      padding-top: 16%;
     
       img{
         display: inline-block;
         vertical-align: middle;
-        width: 70%;
+        width: 200px;
         border-style: none;
+
+        transition-property: transform;
+        transition-duration: 1s;
+        /* Firefox 4 */
+        -moz-transition-property: transform;
+        -moz-transition-duration: 1s;
+        /* Safari and Chrome */
+        -webkit-transition-property: transform;
+        -webkit-transition-duration: 1s;
+        /* Opera */
+        -o-transition-property: transform;
+        -o-transition-duration: 1s;
+      }
+      img:hover{
+        transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
       }
     
-      h1{
+      h2{
         vertical-align: middle;
         font-size: 20px;
-        margin: 0 0 0 12px;
+        margin: 12px;
         font-family: 'Myriad Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif;
-        font-weight: 600;
+        font-weight: 500;
       }
     }
     
@@ -39,11 +59,12 @@
   .contents{
     float: left;
     width: 75%;
-    margin-left: 25%;
-    // background: #ddd;
-    // padding: 16px;
     height: 100%;
-    padding-right: 40px;
+    padding: 24px;
+    background: #fff;
+  }
+  .clear{
+    clear: both;
   }
 }
 

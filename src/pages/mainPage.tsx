@@ -227,14 +227,16 @@ class App extends React.Component<AppProps, any> {
       pathName
     } = this.props;
     const navs = this.renderNav(routerNavJson);
+    let userInfo = sessionStorage.getItem('userInfo');
+    const userName = JSON.parse(userInfo).userName;
 
     return (
       <div className='layout'>
-        <QueueAnim delay={300} type='left'>
-          <div className='side' key='sssss'>
-            <div className="logo" >
+        <QueueAnim delay={500} className='side' type='left' duration={1000}>
+          <div key='0'>
+            <div className="logo">
               <img src={require('../../public/kobe.jpg')} />
-              <h1>my blog</h1>
+              <h2>{userName}</h2>
             </div>
             <Menu
               selectedKeys={[selectKey]}
@@ -248,10 +250,9 @@ class App extends React.Component<AppProps, any> {
           </div>
         </QueueAnim>
         <div className='contents'>
-          <div style={{ padding: 24, background: '#fff' }}>
-            {children}
-          </div>
+          {children}
         </div>
+        <div className='clear'></div>
       </div>
     );
   }
