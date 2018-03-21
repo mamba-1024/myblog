@@ -14,7 +14,7 @@ import {
     UPDATE_FETCHING,
     DELETE_RECORD,
 } from '../../action/profileAction';
-const marked = require('marked');
+// const marked = require('marked');
 import * as moment from 'moment';
 // import highlight from 'highlight.js';
 
@@ -69,11 +69,11 @@ class Profile extends React.Component<profileProps, any> {
             fetching
         } = this.props;
 
-        marked.setOptions({
-            highlight: function (code) {
-                return require('highlight.js').highlightAuto(code).value;
-            }
-        });
+        // marked.setOptions({
+        //     highlight: function (code) {
+        //         return require('highlight.js').highlightAuto(code).value;
+        //     }
+        // });
 
         return (
             <Spin spinning={fetching} size='large'>

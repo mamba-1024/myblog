@@ -10,6 +10,7 @@ module.exports = {
         filename: "bundle-[hash].js",//打包后输出文件的文件名
         chunkFilename: '[name].[chunkhash:5].chunk.js'
     },
+    devtool: 'nosources-source-map',
     resolve: {
         extensions: ['.js', '.jsx', '.ts', '.tsx', '.css', '.less', '.json', '.gif', '.html', '.png', '.webp', '.jpg',],
     },
@@ -77,8 +78,9 @@ module.exports = {
         ]
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),//热加载插件
+        // new webpack.HotModuleReplacementPlugin(),//热加载插件
         new webpack.optimize.OccurrenceOrderPlugin(),
+        new webpack.optimize.UglifyJsPlugin(),
         new webpack.DefinePlugin({
             'process.env': {
                 NODE_ENV: '"production"'
