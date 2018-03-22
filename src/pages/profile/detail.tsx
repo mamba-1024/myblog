@@ -23,6 +23,7 @@ class Detail extends React.Component<detailProps, any> {
     }
     componentWillMount() {
         const id = queryURL('id');
+    
         this.props.dispatch({
             type: GET_ARTICLE_SINGLE,
             params: { id: id }
@@ -36,10 +37,14 @@ class Detail extends React.Component<detailProps, any> {
         const {
             article
         } = this.props;
+    
+        if(article.id){
+            // 针对update页面刷新导致的拿不到数据
+            sessionStorage.setItem('singleArticle', JSON.stringify(article));
+        }
+
         marked.setOptions({
-            // highlight: function (code) {
-            //     return require('highlight.js').highlightAuto(code).value;
-            // },
+
             highlight: function (code) {
                 return hljs.highlightAuto(code).value
             },
@@ -53,7 +58,7 @@ class Detail extends React.Component<detailProps, any> {
             smartLists: true,
             smartypants: false,
         });
-        
+
         return (
             <QueueAnim delay={700} type='bottom'>
                 <div key='dddddd' className='detail-contents'>

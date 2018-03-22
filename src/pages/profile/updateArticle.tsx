@@ -37,10 +37,15 @@ class UpdateArticle extends React.Component<updateProps, any>{
     }
     componentWillMount() {
         const { article } = this.props;
-        const isMarkdown = article.isMarkdown;
-        const articleTitle = article.title;
-        const articleContent = article.content;
-        const articleSummary = article.summary;
+        let tmp;
+        if(!article.id){
+            tmp = JSON.parse(sessionStorage.getItem('singleArticle'));            
+        }
+
+        const isMarkdown = article.isMarkdown || tmp.isMarkdown;
+        const articleTitle = article.title || tmp.title;
+        const articleContent = article.content || tmp.content;
+        const articleSummary = article.summary || tmp.summary;
 
         /*  https://github.com/jpuri/html-to-draftjs
             https://github.com/jpuri/react-draft-wysiwyg/issues/417
