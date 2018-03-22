@@ -8,8 +8,9 @@ import {
 
 const sessionStorage_openKey = sessionStorage.getItem('selectKey');
 const sessionStorage_pathName = JSON.parse(sessionStorage.getItem('pathName'));
+const iscollapsed = JSON.parse(sessionStorage.getItem('collapsed'));
 const initialState = Immutable.fromJS({
-    collapsed: false,
+    collapsed: iscollapsed === null ? false : !iscollapsed,
     featchData: '',
     isFeatching: false,
     navJson: {},
@@ -23,21 +24,21 @@ export const mainPage = (state = initialState, action) => {
     const data = action.params;
     switch (action.type) {
         case INDEX_SIDE_TYPE: {
-            return state.update('collapsed', (value) => {
-                sessionStorage.setItem('mainPage', JSON.stringify({ collapsed: !value }));
+            return state.update('collapsed', (value: any) => {
+                sessionStorage.setItem('collapsed', value);
                 return !value
             });
         }
         case RECEIVE_DATA: {
             return state.update('featchData', () => Immutable.fromJS(data)).
-                update('isFeatching', ()=> false)
+                update('isFeatching', () => false)
         }
         case HANDLE_SIDE_MENU: {
             return state.update('selectKey', () => Immutable.fromJS(data.selectKey)).
-                update('pathName', ()=> Immutable.fromJS(data.pathName))
+                update('pathName', () => Immutable.fromJS(data.pathName))
         }
         case SET_OPEN_KEYS: {
-            return state.update('openKeys', ()=>Immutable.fromJS(data))
+            return state.update('openKeys', () => Immutable.fromJS(data))
         }
         default: return state;
     }

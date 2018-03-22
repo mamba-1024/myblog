@@ -7,7 +7,7 @@ let prod_api = 'http://120.27.11.104:7001';
 
 if(process.env.NODE_ENV==='development'){
     console.log('dev');
-    API = prod_api;
+    API = dev_api;
 }else if(process.env.NODE_ENV==='production'){
     console.log('prod');
     API = prod_api;

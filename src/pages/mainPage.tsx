@@ -19,7 +19,7 @@ interface AppProps {
   openKeys?: any,
   selectKey?: any,
   pathName?: any,
-  userInfo?: any
+  userInfo?: any,
 }
 
 class App extends React.Component<AppProps, any> {
@@ -239,22 +239,33 @@ class App extends React.Component<AppProps, any> {
 
     return (
       <div className='layout'>
-        <QueueAnim delay={500} className='side' type='left' duration={1000}>
-          <div key='0'>
-            <div className="logo">
-              <img src={require('../../public/kobe.jpg')} />
-              <h2>{userInfo.userName ? userInfo.userName : this.state.userName}</h2>
-            </div>
-            <Menu
-              selectedKeys={[selectKey]}
-              mode="inline"
-              onClick={this.handleClick.bind(this)}
-              onOpenChange={this.onOpenChange.bind(this)}
-              style={{ width: '70%', margin: '0 auto' }}
-            >
-              {navs}
-            </Menu>
+        <QueueAnim delay={500} className='side' id={collapsed ? 'collapsed' : ''} type='left' duration={1000}>
+          <div key='0' >
+            <Icon
+              className="trigger"
+              type={collapsed ? 'menu-unfold' : 'menu-fold'}
+              onClick={this.onCollapse}
+            />
           </div>
+          {
+            !collapsed &&
+            <div key='1'>
+              <div className="logo">
+                <img src={require('../../public/kobe.jpg')} />
+                <h2>{userInfo.userName ? userInfo.userName : this.state.userName}</h2>
+              </div>
+              <Menu
+                selectedKeys={[selectKey]}
+                mode="vertical"
+                onClick={this.handleClick.bind(this)}
+                onOpenChange={this.onOpenChange.bind(this)}
+                style={{ width: '70%', margin: '0 auto' }}
+                inlineCollapsed={collapsed}
+              >
+                {navs}
+              </Menu>
+            </div>
+          }
         </QueueAnim>
         <div className='contents'>
           {children}

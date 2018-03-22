@@ -195,7 +195,7 @@ class UpdateArticle extends React.Component<updateProps, any>{
                                             />
                                         </TabPane>
                                         <TabPane tab='预览' key='2'>
-                                            <div style={{ border: '1px solid #ddd', minHeight: 400, padding: 12 }}>
+                                            <div style={{ border: '1px solid #ddd', minHeight: 400, padding: 12, overflow: 'auto' }}>
                                                 <div dangerouslySetInnerHTML={{ __html: marked(articleContent) }}></div>
                                             </div>
                                         </TabPane>

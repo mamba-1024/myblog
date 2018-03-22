@@ -6,11 +6,19 @@
   .side{
     float: left;
     height: 100%;
-    width: 25%;    
+    width: 300px;    
     text-align: center;
     // border-right: 1px solid #ddd;
     overflow: auto;
+
+    transition-property: width;
+    transition-duration: 1s;
     
+    .trigger{
+      font-size: 20px;
+      margin-top: 24px;
+      cursor: pointer;
+    }
 
     .logo {
       position: relative;
@@ -20,7 +28,7 @@
       transition: all .3s;
       // background: #002140;
       overflow: hidden;
-      padding-top: 16%;
+      padding-top: 12%;
     
       img{
         display: inline-block;
@@ -54,16 +62,20 @@
         font-family: 'Myriad Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif;
         font-weight: 500;
       }
-    }
-    
+    } 
   }
+  #collapsed{
+    width: 60px;
+  }
+
   .contents{
     float: left;
-    width: 75%;
+    width: 900px;
     height: 100%;
     padding: 24px;
     background: #fff;
   }
+ 
   .clear{
     clear: both;
   }

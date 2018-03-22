@@ -9,6 +9,7 @@ import {
 } from '../../action/profileAction';
 import * as moment from 'moment';
 const marked = require('marked');
+import * as hljs from 'highlight.js';
 import { browserHistory } from 'react-router';
 
 interface detailProps {
@@ -35,6 +36,23 @@ class Detail extends React.Component<detailProps, any> {
         const {
             article
         } = this.props;
+        marked.setOptions({
+            // highlight: function (code) {
+            //     return require('highlight.js').highlightAuto(code).value;
+            // },
+            highlight: function (code) {
+                return hljs.highlightAuto(code).value
+            },
+            langPrefix: 'hljs lang-',
+            renderer: new marked.Renderer(),
+            gfm: true, //启动Github样式的Markdown
+            breaks: true, // 支持Github换行符，必须打开gfm选项
+            tables: true, // 支持Github表格，必须打开gfm选项
+            pedantic: false,
+            sanitize: true,
+            smartLists: true,
+            smartypants: false,
+        });
         
         return (
             <QueueAnim delay={700} type='bottom'>
@@ -54,6 +72,7 @@ class Detail extends React.Component<detailProps, any> {
                         {
                             article.isMarkdown === 1 ?
                                 <div dangerouslySetInnerHTML={{ __html: marked(article.content) }}></div>
+                                // <div>{marked(article.content)}</div>
                                 :
                                 <div dangerouslySetInnerHTML={{ __html: article.content }}></div>
                         }
