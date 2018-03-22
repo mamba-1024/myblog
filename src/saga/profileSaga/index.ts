@@ -118,6 +118,8 @@ function* getArticleAsync(obj) {
                 message.success('更新成功', 1.5, () => {
                     browserHistory.push(`detail?id=${id}`);
                 });
+            }else{
+                message.error('更新失败，服务异常');
             }
         }
     }

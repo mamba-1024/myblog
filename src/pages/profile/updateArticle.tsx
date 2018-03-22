@@ -36,16 +36,16 @@ class UpdateArticle extends React.Component<updateProps, any>{
         }
     }
     componentWillMount() {
-        const { article } = this.props;
+        const { article, dispatch } = this.props;
         let tmp;
-        if(!article.id){
-            tmp = JSON.parse(sessionStorage.getItem('singleArticle'));            
+        if (!article.id) {
+            tmp = JSON.parse(sessionStorage.getItem('singleArticle'));
         }
 
-        const isMarkdown = article.isMarkdown || tmp.isMarkdown;
-        const articleTitle = article.title || tmp.title;
-        const articleContent = article.content || tmp.content;
-        const articleSummary = article.summary || tmp.summary;
+        const isMarkdown = article.id ? article.isMarkdown : tmp.isMarkdown;
+        const articleTitle = article.id ? article.title : tmp.title;
+        const articleContent = article.id ? article.content : tmp.content;
+        const articleSummary = article.id ? article.summary : tmp.summary;
 
         /*  https://github.com/jpuri/html-to-draftjs
             https://github.com/jpuri/react-draft-wysiwyg/issues/417
@@ -88,21 +88,32 @@ class UpdateArticle extends React.Component<updateProps, any>{
             articleContent,
             isMarkdown
         } = this.state;
-        const { article } = this.props;
+        const { article, dispatch } = this.props;
 
-        const { dispatch } = this.props;
         // 判断是否已经输入标题和内容
         if (articleTitle && articleContent) {
+            let tmp;
+            if (article.id) {
+                let params = {
+                    ...article,
+                    title: articleTitle,
+                    summary: articleSummary,
+                    content: articleContent,
+                    isMarkdown: isMarkdown
+                };
+                dispatch({ type: UPDATE_RECORD, params: params });
+            } else {
+                tmp = JSON.parse(sessionStorage.getItem('singleArticle'));
+                let params = {
+                    ...tmp,
+                    title: articleTitle,
+                    summary: articleSummary,
+                    content: articleContent,
+                    isMarkdown: isMarkdown
+                };
 
-            let params = {
-                ...article,
-                title: articleTitle,
-                summary: articleSummary,
-                content: articleContent,
-                isMarkdown: isMarkdown
-            };
-
-            dispatch({ type: UPDATE_RECORD, params: params });
+                dispatch({ type: UPDATE_RECORD, params: params });
+            }
         } else {
             message.warning('标题、概要和内容都必填');
         }
