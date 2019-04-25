@@ -24,3 +24,4 @@ react/redux/redux-saga/react-router/antd/immutable/webpack
 12. [学习笔记](https://github.com/huangketong/myblog/issues/11)
 13. [开发自己的cli工具](https://github.com/huangketong/myblog/issues/8)
 14. [工作中遇到的环境配置问题](https://github.com/huangketong/myblog/issues/14)
+15. [js触发子元素事件，而不触发父元素事件(阻止事件冒泡)](https://github.com/huangketong/myblog/issues/15)
