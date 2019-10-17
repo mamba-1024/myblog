@@ -37,3 +37,4 @@ http://localhost:8002
 13. [开发自己的cli工具](https://github.com/huangketong/myblog/issues/8)
 14. [工作中遇到的环境配置问题](https://github.com/huangketong/myblog/issues/14)
 15. [js触发子元素事件，而不触发父元素事件(阻止事件冒泡)](https://github.com/huangketong/myblog/issues/15)
+16. [初探二叉树](https://github.com/huangketong/myblog/blob/master/blog/%E4%BA%8C%E5%8F%89%E6%A0%91.md)
