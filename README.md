@@ -20,7 +20,7 @@ http://localhost:8002
 
 
 
-> 乐观、积极、皮实
+> 乐观、积极、思考🤔
 
 1. [JavaScript继承](https://github.com/huangketong/myblog/issues/13)
 2. [排序算法](https://github.com/huangketong/myblog/issues/12)
