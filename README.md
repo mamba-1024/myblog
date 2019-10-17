@@ -1,14 +1,26 @@
 ### react-admin
 
+> 技术栈
+
 react/redux/redux-saga/react-router/antd/immutable/webpack
 
-#### 页面地址之自己的blog地址
+> 页面地址之自己的blog地址
 
 ['狂戳这里'](http://120.27.11.104)
+因为服务器已到期没有再续，所以此地址无法访问
+
+**本地开发**
+```
+git clone https://github.com/huangketong/myblog.git
+npm install
+npm run dll
+npm run dev
+http://localhost:8002
+```
 
 
 
-## 也算是自己平时的积累吧
+> 乐观、积极、皮实
 
 1. [JavaScript继承](https://github.com/huangketong/myblog/issues/13)
 2. [排序算法](https://github.com/huangketong/myblog/issues/12)
