@@ -4,7 +4,7 @@
 
 react/redux/redux-saga/react-router/antd/immutable/webpack
 
-> 页面地址之自己的blog地址
+> 页面地址自己的blog地址
 
 ['狂戳这里'](http://120.27.11.104)
 因为服务器已到期没有再续，所以此地址无法访问
