@@ -104,6 +104,7 @@ const fileName = urlencode(`${projectName}-${versionId}.${fileType}`, 'utf-8');
   try {
     // 将文件中数据接口解析成数据库中需要的格式
     let dataList
+
     if(fileType === -1) { // .excel文件
       // 使用 xlsx 库解析文件
       const obj = xlsx.parse(uploadDir + '/' + ctx.request.body.filename);
@@ -147,7 +148,7 @@ const fileName = urlencode(`${projectName}-${versionId}.${fileType}`, 'utf-8');
 
     // 接下来就是 将数据分类成插入和更新两种操作
     ....
-    数据库的 insert 和 update
+    dataList 数据库的 insert 和 update
     ....
 
 
@@ -158,3 +159,8 @@ const fileName = urlencode(`${projectName}-${versionId}.${fileType}`, 'utf-8');
 
 
 ```
+
+
+至此，文件的上传和导出已经完成，代码直接可以使用😁
+
+欢迎优化
