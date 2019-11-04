@@ -152,9 +152,6 @@ const fileName = urlencode(`${projectName}-${versionId}.${fileType}`, 'utf-8');
     ....
 
 
-  }catch (e) {
-    ctx.body = '格式不符合要求！'
-    throw new Error('格式不符合要求！')
   }
 
 
