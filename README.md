@@ -41,3 +41,4 @@ http://localhost:8002
 17. [初探二叉树](https://github.com/huangketong/myblog/issues/19)
 18. [HTTPS了解](https://github.com/huangketong/myblog/issues/20)
 19. [基于node的文件上传和下载](https://github.com/huangketong/myblog/issues/21)
+20. [axios拦截器处理重定向](https://github.com/huangketong/myblog/issues/22)
