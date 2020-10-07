@@ -43,3 +43,5 @@ http://localhost:8002
 19. [基于node的文件上传和下载](https://github.com/huangketong/myblog/issues/21)
 20. [axios拦截器处理重定向](https://github.com/huangketong/myblog/issues/22)
 21. [千分位格式化](https://github.com/huangketong/myblog/issues/24)
+22. [React生命周期和hock 的一些使用心得](https://github.com/huangketong/myblog/issues/25)
+
